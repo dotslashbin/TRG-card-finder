@@ -1,13 +1,20 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
-const app = express();
 const port = 3001;
 
-app.get('/', (_req: Request, res: Response) => {
-  res.send('Good luck!');
-});
+export default async function startServer() {
+  const app = express();
 
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Listening on port ${port}.`);
-});
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  await require('./loaders').default(app);
+
+  app
+    .listen(port, () => {
+      console.log(`The server is running on port ${port}`);
+    })
+    .on('error', (error: any) => {
+      console.error(`Express failed: ${error}`);
+    });
+}
+
+startServer();
