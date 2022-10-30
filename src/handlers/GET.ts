@@ -3,17 +3,24 @@ import { ReturnError, ReturnSuccess } from '../helpers/Response';
 import ScryfallFetcher from '../services/SryfallFetcher';
 
 // eslint-disable-next-line import/prefer-default-export
-export async function FindCards(request: Request, response: Response) {
+export function FindCards(request: Request, response: Response) {
   const service = new ScryfallFetcher();
   const { query } = request.query;
 
-  await service
+  service
     .FetchData(`${query}`)
-    .then((result) => {
-      ReturnSuccess(200, response, 'get-cards', result, 'success');
-    })
-    .catch((error) => {
-      console.error('TET LANG ', error);
-      ReturnError(400, response, error, 'Failed to fetch data from source');
-    });
+    .then((result) =>
+      result.object !== 'error'
+        ? ReturnSuccess(
+            200,
+            response,
+            'get-cards',
+            result,
+            'Successfully fetched data from API source',
+          )
+        : ReturnError(result.status, response, result.code, result.details),
+    )
+    .catch((error) =>
+      console.error('DEBUG ...', 'There was an error in the service..', error),
+    );
 }
