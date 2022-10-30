@@ -1,3 +1,3 @@
 export interface DataFetcher {
-  FetchData(paramters: string): string;
+  FetchData(paramters: string): Promise<string | void>;
 }
