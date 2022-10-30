@@ -1,14 +1,16 @@
 import type { Request, Response } from 'express';
-import axios from 'axios';
-import { ReturnSuccess, ReturnError } from '../helpers/Response';
+import { ReturnSuccess } from '../helpers/Response';
+import ScryfallFetcher from '../services/SryfallFetcher';
 
 // eslint-disable-next-line import/prefer-default-export
 export async function FindCards(_request: Request, response: Response) {
+  const service = new ScryfallFetcher();
+
   ReturnSuccess(
     200,
     response,
     'get-cards',
-    { foo: 'bar', another: 'one' },
+    { foo: 'bar', another: service.FetchData('testing lang') },
     'Successfully fetched something',
   );
 
