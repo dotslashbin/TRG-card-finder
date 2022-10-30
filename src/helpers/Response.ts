@@ -35,6 +35,7 @@ export const ReturnSuccess = (
 export const ReturnError = (
   status: number,
   response: Response,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
   message: string,
 ): void => {
