@@ -1,16 +1,26 @@
 import type { Request, Response } from 'express';
-import axios from 'axios';
-import { ReturnSuccess, ReturnError } from '../helpers/Response';
+import { ReturnError, ReturnSuccess } from '../helpers/Response';
+import ScryfallFetcher from '../services/SryfallFetcher';
 
 // eslint-disable-next-line import/prefer-default-export
-export async function FindCards(_request: Request, response: Response) {
-  ReturnSuccess(
-    200,
-    response,
-    'get-cards',
-    { foo: 'bar', another: 'one' },
-    'Successfully fetched something',
-  );
+export function FindCards(request: Request, response: Response) {
+  const service = new ScryfallFetcher();
+  const { query } = request.query;
 
-  // return axios.get('https://api.scryfall.com/cards/search?q=blue');
+  service
+    .FetchData(`${query}`)
+    .then((result) =>
+      result.object !== 'error'
+        ? ReturnSuccess(
+            200,
+            response,
+            'get-cards',
+            result,
+            'Successfully fetched data from API source',
+          )
+        : ReturnError(result.status, response, result.code, result.details),
+    )
+    .catch((error) =>
+      console.error('DEBUG ...', 'There was an error in the service..', error),
+    );
 }

@@ -14,5 +14,8 @@
     "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended",
     "prettier"
-  ]
+  ], 
+  "rules": {
+    "no-console":"off"
+  }
 }
