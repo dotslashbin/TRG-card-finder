@@ -1,6 +1,12 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import type { DataFetcher } from './CommonInterfaces';
+
+// types
+import type {
+  DataFetcher,
+  FailedAPICall,
+  SuccessfulAPICall,
+} from './CommonInterfaces';
 
 dotenv.config();
 
@@ -15,7 +21,7 @@ export default class ScryfallFetcher implements DataFetcher {
 
   async FetchData(
     input: string,
-  ): Promise<{ total: number; data: any[] } | void> {
+  ): Promise<SuccessfulAPICall | FailedAPICall | void> {
     this.searchParams = input;
 
     return axios
