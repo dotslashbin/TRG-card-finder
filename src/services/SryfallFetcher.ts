@@ -13,7 +13,9 @@ export default class ScryfallFetcher implements DataFetcher {
 
   private API_URL = process.env['API_SOURCE'];
 
-  FetchData(input: string): Promise<{ total: number; data: any[] } | void> {
+  async FetchData(
+    input: string,
+  ): Promise<{ total: number; data: any[] } | void> {
     this.searchParams = input;
 
     return axios
@@ -24,6 +26,8 @@ export default class ScryfallFetcher implements DataFetcher {
         total: result.data.total_cards,
         data: result.data.data,
       }))
-      .catch((error) => console.error(error));
+      .catch((error) =>
+        console.error('DEBUG ...', 'error on axios => ', error),
+      );
   }
 }
