@@ -26,8 +26,6 @@ export default class ScryfallFetcher implements DataFetcher {
         total: result.data.total_cards,
         data: result.data.data,
       }))
-      .catch((error) =>
-        console.error('DEBUG ...', 'error on axios => ', error),
-      );
+      .catch((error) => error.response.data);
   }
 }
