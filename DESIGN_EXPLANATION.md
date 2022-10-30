@@ -9,3 +9,6 @@
 3. Created a serivces folder to hold the implementations of the various core features of the application.
    1. Each feature are meant to be functioning as services that can be utilised by the handlers. 
    2. The services will contain the bulk of the implementation
+4. The service ScryfallFetcher has the axios implementation which was designed to return both "success" and "failed" results. At this point, there has been no critical benefit to evaluating the axios reults, therefore we just send it back. 
+   1. The GET handler then evaluates if return of the service is successfull or failed. Based on this, it will decided on what to return as a response. 
+   2. The returned response are wrapped to allow flexibility on future implementation, in case there is a need to process the rusults for presentaiton. 
