@@ -1,3 +1,3 @@
 export interface DataFetcher {
-  FetchData(paramters: string): Promise<string | void>;
+  FetchData(paramters: string): Promise<{ total: any; data: any } | void>;
 }

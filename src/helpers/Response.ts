@@ -11,11 +11,12 @@ export const ReturnSuccess = (
   status: number,
   response: Response,
   endPointName: string,
-  data: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  results: any,
   message: string,
 ): void => {
   const returnFormat = {
-    data,
+    results,
     status,
     endPointName,
     message,
