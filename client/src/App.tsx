@@ -1,13 +1,14 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import * as _ from 'lodash'
+import axios from 'axios';
 
 // CONFIG
 import { API_SOURCE } from './config'
 
 // Components
 import Cards from './components/Cards'
+import Menu from './components/Menu';
 import Searchbox from './components/Searchbox';
-import axios from 'axios';
 
 
 function App(): ReactElement {
@@ -48,10 +49,7 @@ function App(): ReactElement {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <a href="#" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Home</a>
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Josh's Github</a>
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked In</a>
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact Him</a>
+                  <Menu />
                 </div>
               </div>
             </div>
@@ -60,10 +58,7 @@ function App(): ReactElement {
 
         <div className="md:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-            <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Josh's Github</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Linked In</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact Him</a>
+            <Menu />
           </div>
         </div>
       </nav>
@@ -80,6 +75,7 @@ function App(): ReactElement {
           </div>
           <div className="px-4 py-6 sm:px-0">
             <Cards data={ cardCollection } />
+            
           </div>
         </div>
       </main>
