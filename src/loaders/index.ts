@@ -1,5 +1,5 @@
+import cors from 'cors';
 import expressLoader from './Routes';
-// import cors from 'cors'
 // import helmet from 'helmet'
 // import mongoose from 'mongoose'
 
@@ -11,6 +11,8 @@ import expressLoader from './Routes';
 export default async function (expressApp: any): Promise<any> {
   // Middlewares
   // expressApp.use()
+
+  expressApp.use(cors());
 
   // Express
   await expressLoader({ app: expressApp });
