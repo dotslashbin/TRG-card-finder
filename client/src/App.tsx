@@ -27,7 +27,10 @@ function App(): ReactElement {
     if(keywords) {
       axios.get(`http://${ process.env.REACT_APP_API_HOST }:${ process.env.REACT_APP_API_PORT }/${ API_SOURCE.search }?query=${ keywords }`)
       .then((result) => {
-        console.log('DEBUG ...', 'API results => ', result)
+        const apiResult = result.data.results
+        const { total_cards, data } = apiResult
+
+        setCardCollection(data)
       })
       .catch(error => console.error('DEBUG ....', 'Error in the axios call', error))
     }
