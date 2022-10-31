@@ -1,14 +1,19 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import * as _ from 'lodash'
 
+// CONFIG
+import { API_SOURCE } from './config'
+
 // Components
 import Cards from './components/Cards'
 import Searchbox from './components/Searchbox';
+import axios from 'axios';
 
 
 function App(): ReactElement {
 
   const [ keywords, setKeywords ] = useState('')
+  const [ cardCollection, setCardCollection ] = React.useState<any>()
   
   const handleSearch  = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeywords(event.target.value)
@@ -19,7 +24,14 @@ function App(): ReactElement {
 		, [])
 
   useEffect(() => {
-    console.log('DEBUG ...', 'the new keywords =>', keywords)
+    if(keywords) {
+      axios.get(`http://${ process.env.REACT_APP_API_HOST }:${ process.env.REACT_APP_API_PORT }/${ API_SOURCE.search }?query=${ keywords }`)
+      .then((result) => {
+        console.log('DEBUG ...', 'API results => ', result)
+      })
+      .catch(error => console.error('DEBUG ....', 'Error in the axios call', error))
+    }
+    
   }, [keywords])
 
   return (
