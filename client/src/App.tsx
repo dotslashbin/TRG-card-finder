@@ -10,11 +10,10 @@ import Cards from './components/Cards'
 import Menu from './components/Menu';
 import Searchbox from './components/Searchbox';
 
-
 function App(): ReactElement {
 
-  const [ keywords, setKeywords ] = useState('')
   const [ cardCollection, setCardCollection ] = React.useState<any>()
+  const [ keywords, setKeywords ] = useState('')
   
   const handleSearch  = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeywords(event.target.value)
@@ -29,13 +28,13 @@ function App(): ReactElement {
       axios.get(`http://${ process.env.REACT_APP_API_HOST }:${ process.env.REACT_APP_API_PORT }/${ API_SOURCE.search }?query=${ keywords }`)
       .then((result) => {
         const apiResult = result.data.results
-        const { total_cards, data } = apiResult
+        const { data } = apiResult
 
         setCardCollection(data)
       })
       .catch(error => console.error('DEBUG ....', 'Error in the axios call', error))
     }
-    
+
   }, [keywords])
 
   return (
@@ -71,11 +70,11 @@ function App(): ReactElement {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="my-10">
-            <Searchbox triggerMethod={debouncedChangeHandler}/>
+            <Searchbox triggerMethod={debouncedChangeHandler} />
           </div>
-          <div className="px-4 py-6 sm:px-0">
+          
+          <div className="p-2 sm:px-0">
             <Cards data={ cardCollection } />
-            
           </div>
         </div>
       </main>
