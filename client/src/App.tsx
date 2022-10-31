@@ -78,7 +78,7 @@ function App(): ReactElement {
           </div>
         </div>
       </main>
-</div>
+    </div>
   );
 }
 
