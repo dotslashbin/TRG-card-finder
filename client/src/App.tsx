@@ -1,10 +1,28 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
+import * as _ from 'lodash'
 
 // Components
 import Cards from './components/Cards'
 import Searchbox from './components/Searchbox';
 
+
 function App(): ReactElement {
+
+  const [ keywords, setKeywords ] = useState('')
+  
+  const handleSearch  = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('DEBUG ...', 'the value', event.target.value)
+  }
+
+  const debouncedChangeHandler = useMemo(
+		() => _.debounce(handleSearch, 1200)
+		, [])
+
+
+  useEffect(() => {
+    console.log('APP LOADED', keywords)
+    setKeywords('testing')
+  }, [])
 
   return (
     <div className="min-h-full App">
@@ -45,7 +63,7 @@ function App(): ReactElement {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="my-10">
-            <Searchbox />
+            <Searchbox triggerMethod={debouncedChangeHandler}/>
           </div>
           <div className="px-4 py-6 sm:px-0">
             <Cards />
