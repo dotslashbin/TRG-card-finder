@@ -11,18 +11,16 @@ function App(): ReactElement {
   const [ keywords, setKeywords ] = useState('')
   
   const handleSearch  = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('DEBUG ...', 'the value', event.target.value)
+    setKeywords(event.target.value)
   }
 
   const debouncedChangeHandler = useMemo(
 		() => _.debounce(handleSearch, 1200)
 		, [])
 
-
   useEffect(() => {
-    console.log('APP LOADED', keywords)
-    setKeywords('testing')
-  }, [])
+    console.log('DEBUG ...', 'the new keywords =>', keywords)
+  }, [keywords])
 
   return (
     <div className="min-h-full App">
