@@ -79,7 +79,7 @@ function App(): ReactElement {
             <Searchbox triggerMethod={debouncedChangeHandler}/>
           </div>
           <div className="px-4 py-6 sm:px-0">
-            <Cards />
+            <Cards data={ cardCollection } />
           </div>
         </div>
       </main>
