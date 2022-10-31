@@ -10,9 +10,10 @@ function Cards(props: { data: any[]  }): ReactElement {
               {card && card.image_uris && card.image_uris.png? (<img src={ card.image_uris.png } className="mx-3"/>):(<></>)}
               
               <div className='flex flex-col'>
-                <div className='text-white text-left'>{ card.name? card.name: '' }</div>
-                <div className='text-white text-left'>{ card.set_name? card.set_name: '' }</div>
-                <div className='text-white text-left'>{ card.collector_number? card.collector_number: '' }</div>
+                <div className='text-white text-left text-xs'>Collector # { card.collector_number? card.collector_number: '' }</div>
+                <div className='text-white text-left font-bold'>{ card.name? card.name: '' }</div>
+                <div className='text-white text-left font-semibold'>{ card.set_name? card.set_name: '' }</div>
+                <hr />
                 <div className='text-white text-left'>{ card.rarity? card.rarity: '' }</div>
               </div>
           </div>
